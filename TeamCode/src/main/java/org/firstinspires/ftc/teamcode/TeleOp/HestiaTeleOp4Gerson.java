@@ -17,7 +17,7 @@ public class HestiaTeleOp4Gerson extends OpMode {
         DcMotor viperTurnMotorTwo;
         DcMotor viperSlideMotor;
        private Servo clawPartOne;
-       private Servo clawPartTwo;
+       private Servo clawPartZero;
 
 public void init(){
 //On startup, this code maps the motors and servos to their designations on the drivers hub 
@@ -29,7 +29,7 @@ viperTurnMotor = hardwareMap.dcMotor.get("viperTurnMotor");
 viperTurnMotorTwo = hardwareMap.dcMotor.get("viperTurnMotorTwo");
 viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
 clawPartOne = hardwareMap.servo.get("clawPartOne");
-clawPartTwo = hardwareMap.servo.get("clawPartTwo");
+clawPartZero = hardwareMap.servo.get("clawPartZero");
 //Whenever the arm/viperTurnMotor is put to sleep, it stays in the same position and brakes(will be found in the if statements for the arm)
 viperTurnMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 viperTurnMotorTwo.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -81,7 +81,7 @@ viperSlideMotor.setPower(viperSlide);
 if (gamepad2.left_bumper){
         //set the claw position to .2 (closed claw)
         clawPartOne.setPosition(.14);
-        clawPartTwo.setPosition(.86);
+        clawPartZero.setPosition(.86);
         //set the servoPosition variable to .2
        // getServoPosition = 0.2;
 //if gamepad 2 right_bumper and the variable getServoPosition is equal to .2
@@ -89,7 +89,7 @@ if (gamepad2.left_bumper){
  if (gamepad2.dpad_up ){
         //set the claw position to 0 (open claw)
         clawPartOne.setPosition(0);
-        clawPartTwo.setPosition(1);
+        clawPartZero.setPosition(1);
         //set the servoPosition variable to 0
   //     getServoPosition = 0;
 }
