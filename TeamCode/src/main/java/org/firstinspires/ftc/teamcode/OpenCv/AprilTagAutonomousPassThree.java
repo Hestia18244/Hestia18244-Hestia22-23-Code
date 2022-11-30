@@ -27,6 +27,9 @@ public class AprilTagAutonomousPassThree extends LinearOpMode
     DcMotor frontLeftMotor;
     DcMotor backRightMotor;
     DcMotor backLeftMotor;
+    DcMotor viperTurnMotor;
+    DcMotor viperSlideMotor;
+    Servo clawPartOne;
     //declares that the pipeline is being used for this
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -60,6 +63,9 @@ public class AprilTagAutonomousPassThree extends LinearOpMode
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
+        viperTurnMotor = hardwareMap.dcMotor.get("viperTurnMotor");
+        viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
+        clawPartOne = hardwareMap.servo.get("clawPartOne");
         camera.setPipeline(aprilTagDetectionPipeline);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
@@ -222,6 +228,10 @@ public class AprilTagAutonomousPassThree extends LinearOpMode
         backRightMotor.setPower(0);
         backLeftMotor.setPower(0);
         //sleep for whatever number of milliseconds are inputted into the method
+        sleep(ms);
+    }
+    public void servoMove (double servoPosition, int ms){
+        clawPartOne.setPosition(servoPosition);
         sleep(ms);
     }
 }
