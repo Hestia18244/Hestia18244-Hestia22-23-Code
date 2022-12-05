@@ -60,13 +60,13 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
-       /*frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
+       frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
         viperTurnMotor = hardwareMap.dcMotor.get("viperTurnMotor");
         viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
-        clawPartOne= hardwareMap.servo.get("clawPartOne");*/
+        clawPartOne= hardwareMap.servo.get("clawPartOne");
         camera.setPipeline(aprilTagDetectionPipeline);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {

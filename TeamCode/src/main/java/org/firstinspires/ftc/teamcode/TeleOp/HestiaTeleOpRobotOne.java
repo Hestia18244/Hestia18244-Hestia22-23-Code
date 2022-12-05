@@ -3,9 +3,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-@TeleOp (name = "HestiaTeleOp")
+@TeleOp (name = "HestiaTeleOpRobotOne")
 
-public class HestiaTeleOp extends OpMode {
+public class HestiaTeleOpRobotOne extends OpMode {
     //names the motors and servos
     DcMotor frontLeftMotor;
     DcMotor frontRightMotor;
