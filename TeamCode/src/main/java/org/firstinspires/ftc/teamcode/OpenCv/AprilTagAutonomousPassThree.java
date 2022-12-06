@@ -230,8 +230,4 @@ public class AprilTagAutonomousPassThree extends LinearOpMode
         //sleep for whatever number of milliseconds are inputted into the method
         sleep(ms);
     }
-    public void servoMove (double servoPosition, int ms){
-        clawPartOne.setPosition(servoPosition);
-        sleep(ms);
-    }
 }

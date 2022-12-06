@@ -24,7 +24,7 @@ public class RobotTwoTeleOp extends OpMode {
         viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
         clawPartOne = hardwareMap.servo.get("clawPartOne");
         clawPartZero = hardwareMap.servo.get("clawPartZero");
-        //Whenever the arm/viperTurnMotor is put to sleep, it stays in the same position and brakes(will be found in the if statements for the arm)
+        //whenever the cascading slide motor is set to zero power, the motors tries to brake
         viperSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
@@ -33,9 +33,10 @@ public class RobotTwoTeleOp extends OpMode {
     }
 
 
-    //Everything under loop happens during the whole period that the opmode is active
+    //Everything under loop happens during the whole period that the opMode is active
     public void loop(){
         //Different movements on the joysticks are configured to different variables
+        //decimals are used to reduce power
         double forward = .4*(-gamepad1.left_stick_y);
         double turn = .25*(gamepad1.right_stick_x);
         double strafe = .55*(gamepad1.left_stick_x);
@@ -61,23 +62,17 @@ public class RobotTwoTeleOp extends OpMode {
 
 
 //the following code sets the positions of the servos
-//double getServoPosition = 0;
-//boolean servoPositionOpen = getServoPosition==0;
-//if gamepad 2 left_bumper and the variable getServoPosition is equal to zero
+        //if gamepad2 left bumper is pressed
         if (gamepad2.left_bumper){
-            //set the claw position to .2 (closed claw)
+            //set the claw servos' position to be closed
             clawPartOne.setPosition(.14);
             clawPartZero.setPosition(.86);
-            //set the servoPosition variable to .2
-            // getServoPosition = 0.2;
-//if gamepad 2 right_bumper and the variable getServoPosition is equal to .2
-        } //boolean servoPositionClose= getServoPosition ==0.2;
+        }
+        //if gamepad2 right bumper is pressed
         if (gamepad2.right_bumper ){
-            //set the claw position to 0 (open claw)
+            //set the claw servos' position to be open
             clawPartOne.setPosition(0);
             clawPartZero.setPosition(1);
-            //set the servoPosition variable to 0
-            // getServoPosition = 0;
         }
     }
 

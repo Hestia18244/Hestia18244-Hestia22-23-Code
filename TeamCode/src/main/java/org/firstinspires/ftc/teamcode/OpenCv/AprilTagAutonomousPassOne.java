@@ -57,6 +57,7 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
     @Override
     public void runOpMode()
     {
+        //hardware maps the motors to what they are named in the drivers hub
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
@@ -229,10 +230,6 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
         backRightMotor.setPower(0);
         backLeftMotor.setPower(0);
         //sleep for whatever number of milliseconds are inputted into the method
-        sleep(ms);
-    }
-    public void servoMove (double servoPosition, int ms){
-        clawPartOne.setPosition(servoPosition);
         sleep(ms);
     }
 }
