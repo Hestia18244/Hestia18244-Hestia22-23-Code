@@ -169,14 +169,10 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
         if (tagOfInterest == null || tagOfInterest.id == locationOne) {
             //location one code
 
-            //sets the motors to move the proper direction
-            backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-            backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
             //sets the four motors to move to position 1000 on the encoder ticks and sets the power of the motors to .5
             //sleeps the motors for one second once the method is finished running
             //this should move left
-            runToLocation(1000, .5, 1000);
+            runToLocation(50, 50, 50 , 50, .2, 1000);
         } else if (tagOfInterest.id == locationTwo){
             //location two code
         } else if (tagOfInterest.id == locationThree){
@@ -184,7 +180,7 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
         }
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
-        while (opModeIsActive()) {sleep(20);}
+        //while (opModeIsActive()) {sleep(20);}
     }
 
     void tagToTelemetry(AprilTagDetection detection)
@@ -198,17 +194,17 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
     //runToLocation method is called in the if statements to move the robot to whatever location
-    public void runToLocation(int position, double power, int ms){
+    void runToLocation(int frontRight, int frontLeft, int backRight, int backLeft, double power, int ms){
         //resets the encoder value to zero for all motors
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //sets the motors to run to whatever position inputted into the method
-        frontRightMotor.setTargetPosition(position);
-        frontLeftMotor.setTargetPosition(position);
-        backRightMotor.setTargetPosition(position);
-        backLeftMotor.setTargetPosition(position);
+        frontRightMotor.setTargetPosition(frontRight);
+        frontLeftMotor.setTargetPosition(frontLeft);
+        backRightMotor.setTargetPosition(backRight);
+        backLeftMotor.setTargetPosition(backLeft);
         //sets the motors to run to the position it is told to
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -221,6 +217,7 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
         backLeftMotor.setPower(power);
         while (frontRightMotor.isBusy() && frontLeftMotor.isBusy() && backRightMotor.isBusy() && backLeftMotor.isBusy()){
             //while the motors are busy, do nothing
+            idle();
         }
         //once the motors are finished,set the power to zero
         frontRightMotor.setPower(0);

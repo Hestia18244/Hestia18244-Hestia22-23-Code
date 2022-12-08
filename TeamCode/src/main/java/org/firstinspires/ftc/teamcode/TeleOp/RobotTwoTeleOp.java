@@ -14,6 +14,7 @@ public class RobotTwoTeleOp extends OpMode {
     DcMotor viperSlideMotor;
     private Servo clawPartOne;
     private Servo clawPartZero;
+    private Servo slideServo;
 
     public void init(){
         //On startup, this code maps the motors and servos to their designations on the drivers hub
@@ -24,6 +25,7 @@ public class RobotTwoTeleOp extends OpMode {
         viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
         clawPartOne = hardwareMap.servo.get("clawPartOne");
         clawPartZero = hardwareMap.servo.get("clawPartZero");
+        //slideServo = hardwareMap.servo.get("slideServo");
         //whenever the cascading slide motor is set to zero power, the motors tries to brake
         viperSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -34,19 +36,17 @@ public class RobotTwoTeleOp extends OpMode {
 
 
     //Everything under loop happens during the whole period that the opMode is active
-    public void loop(){
+    public void loop() {
         //Different movements on the joysticks are configured to different variables
         //decimals are used to reduce power
-        double forward = .4*(-gamepad1.left_stick_y);
-        double turn = .25*(gamepad1.right_stick_x);
-        double strafe = .55*(gamepad1.left_stick_x);
-        double viperSlide = gamepad2.right_stick_y;
-
+        double forward = .4 * (gamepad1.left_stick_y);
+        double turn = .55 * (-gamepad1.right_stick_x);
+        double strafe = .55 * (-gamepad1.left_stick_x);
+        double viperSlide = .35*(gamepad2.right_stick_y);
 
 
         //tells the motors that drive the robot which way to go for forward and back, strafing, and turning
-
-        double leftfront = (- forward - turn - strafe);
+        double leftfront = (-forward - turn - strafe);
         double rightfront = (forward - turn - strafe);
         double leftrear = (-forward - turn + strafe);
         double rightrear = (forward - turn + strafe);
@@ -60,20 +60,18 @@ public class RobotTwoTeleOp extends OpMode {
         viperSlideMotor.setPower(viperSlide);
 
 
-
 //the following code sets the positions of the servos
         //if gamepad2 left bumper is pressed
-        if (gamepad2.left_bumper){
+        if (gamepad2.left_bumper) {
             //set the claw servos' position to be closed
-            clawPartOne.setPosition(.14);
-            clawPartZero.setPosition(.86);
+            clawPartOne.setPosition(.85);
+            clawPartZero.setPosition(.15);
         }
         //if gamepad2 right bumper is pressed
-        if (gamepad2.right_bumper ){
+        if (gamepad2.right_bumper) {
             //set the claw servos' position to be open
-            clawPartOne.setPosition(0);
-            clawPartZero.setPosition(1);
+            clawPartOne.setPosition(1);
+            clawPartZero.setPosition(0);
         }
     }
-
 }
