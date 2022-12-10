@@ -1,16 +1,14 @@
 //this code should work for all three locations.
-//"PassThree" means that it passes through location three to get to location two
-//use this when location one is the one that contains the cones in it
+//"PassOne" means that it passes through location one to get to location two
+//use this when location three is the one that contains the cones in it
 package org.firstinspires.ftc.teamcode.OpenCv;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.OpenCv.AprilTagDetectionPipeline;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -20,7 +18,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Autonomous
-public class AprilTagAutonomousPassThree extends LinearOpMode
+public class AprilTagAutonomousRight extends LinearOpMode
 {
     OpenCvCamera camera;
     DcMotor frontRightMotor;
@@ -55,6 +53,7 @@ public class AprilTagAutonomousPassThree extends LinearOpMode
     @Override
     public void runOpMode()
     {
+        //hardware maps the motors to what they are named in the drivers hub
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
@@ -63,7 +62,7 @@ public class AprilTagAutonomousPassThree extends LinearOpMode
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
         viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
-        clawPartOne = hardwareMap.servo.get("clawPartOne");
+        //clawPartOne= hardwareMap.servo.get("clawPartOne");
         camera.setPipeline(aprilTagDetectionPipeline);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
@@ -164,25 +163,84 @@ public class AprilTagAutonomousPassThree extends LinearOpMode
         }
 
         /* Actually do something useful */
-       if (tagOfInterest == null || tagOfInterest.id == locationOne) {
-           //location one code
+        if (tagOfInterest == null || tagOfInterest.id == locationOne) {
+            //location one code
+            //move backward
+            frontRightMotor.setPower(.5);
+            frontLeftMotor.setPower(-.5);
+            backRightMotor.setPower(.5);
+            backLeftMotor.setPower(-.5);
+            //sleep causes this to happen for 1 seconds (1000 milliseconds)
+            sleep(900);
+            //set power to move left
+            frontRightMotor.setPower(-.5);
+            frontLeftMotor.setPower(-.5);
+            backRightMotor.setPower(.5);
+            backLeftMotor.setPower(.5);
+            //sleep causes this to happen for 1 seconds (1000 milliseconds)
+            sleep(1800);
+            frontRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            //sleep causes this to happen for 1 seconds (1000 milliseconds)
+            sleep(30000);
+        } else if (tagOfInterest.id == locationTwo){
+            //location two code
+            //pass through location one
+            //move forward
+            frontRightMotor.setPower(.5);
+            frontLeftMotor.setPower(-.5);
+            backRightMotor.setPower(.5);
+            backLeftMotor.setPower(-.5);
+            //sleep causes this to happen for 1 seconds (1000 milliseconds)
+            sleep(900);
+            //set power to move left
+            frontRightMotor.setPower(-.5);
+            frontLeftMotor.setPower(-.5);
+            backRightMotor.setPower(.5);
+            backLeftMotor.setPower(.5);
+            //sleep causes this to happen for 1 seconds (1000 milliseconds)
+            sleep(2525);
+            //move forward into location two
+            frontRightMotor.setPower(-.5);
+            frontLeftMotor.setPower(.5);
+            backRightMotor.setPower(-.5);
+            backLeftMotor.setPower(.5);
+            sleep(900);
+            frontRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            //sleep causes this to happen for 1 seconds (1000 milliseconds)
+            sleep(30000);
 
-           //sets the motors to move the proper direction
-           backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-           backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
-           //sets the four motors to move to position 1000 on the encoder ticks and sets the power of the motors to .5
-           //sleeps the motors for one second once the method is finished running
-           //this should move left
-           runToLocation(1000, .5, 1000);
-       } else if (tagOfInterest.id == locationTwo){
-           //location two code
-       } else if (tagOfInterest.id == locationThree){
-           //location three code
-       }
+        } else if (tagOfInterest.id == locationThree){
+            //location three code
+            //move forward
+            frontRightMotor.setPower(-.5);
+            frontLeftMotor.setPower(.5);
+            backRightMotor.setPower(-.5);
+            backLeftMotor.setPower(.5);
+            //sleep causes this to happen for 1 seconds (1000 milliseconds)
+            sleep(900);
+            //set power to move right
+            frontRightMotor.setPower(-.5);
+            frontLeftMotor.setPower(-.5);
+            backRightMotor.setPower(.5);
+            backLeftMotor.setPower(.5);
+            //sleep causes this to happen for 1 seconds (1000 milliseconds)
+            sleep(1800);
+            frontRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            //sleep causes this to happen for 1 seconds (1000 milliseconds)
+            sleep(30000);
+        }
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
-        while (opModeIsActive()) {sleep(20);}
+        //while (opModeIsActive()) {sleep(20);}
     }
 
     void tagToTelemetry(AprilTagDetection detection)
@@ -196,36 +254,51 @@ public class AprilTagAutonomousPassThree extends LinearOpMode
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
     //runToLocation method is called in the if statements to move the robot to whatever location
-    public void runToLocation(int position, double power, int ms){
+    public void runToLocation(int frontRight, int frontLeft, int backRight, int backLeft, double power, int ms){
         //resets the encoder value to zero for all motors
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //sets the motors to run to whatever position inputted into the method
-        frontRightMotor.setTargetPosition(position);
-        frontLeftMotor.setTargetPosition(position);
-        backRightMotor.setTargetPosition(position);
-        backLeftMotor.setTargetPosition(position);
+        frontRightMotor.setTargetPosition(frontRight);
+        frontLeftMotor.setTargetPosition(frontLeft);
+        backRightMotor.setTargetPosition(backRight);
+        backLeftMotor.setTargetPosition(backLeft);
+        int frontRightTarget= frontRightMotor.getCurrentPosition();
+        int frontLeftTarget = frontLeftMotor.getCurrentPosition();
+        int backRightTarget = backRightMotor.getCurrentPosition();
+        int backLeftTarget = backLeftMotor.getCurrentPosition();
+        frontRightMotor.setPower(power);
+        frontLeftMotor.setPower(power);
+        backRightMotor.setPower(power);
+        backLeftMotor.setPower(power);
         //sets the motors to run to the position it is told to
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         //sets the power of the motors for when it moves to the encoder position
-        frontRightMotor.setPower(power);
-        frontLeftMotor.setPower(power);
-        backRightMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        while (frontRightMotor.isBusy() && frontLeftMotor.isBusy() && backRightMotor.isBusy() && backLeftMotor.isBusy()){
+        while (frontRightMotor.isBusy() || frontLeftMotor.isBusy() || backRightMotor.isBusy() || backLeftMotor.isBusy()) {
             //while the motors are busy, do nothing
         }
-        //once the motors are finished,set the power to zero
+        // moved setPower above runtoposition
+        // commented out the if
+        // changed the while loop to OR instead of AND
+        // moved setpower 0 outside of the if statement
+
         frontRightMotor.setPower(0);
         frontLeftMotor.setPower(0);
         backRightMotor.setPower(0);
         backLeftMotor.setPower(0);
-        //sleep for whatever number of milliseconds are inputted into the method
-        sleep(ms);
+
+
+        /**
+        //once the motors are finished,set the power to zero
+        if (frontRightTarget==frontRight && frontLeftTarget==frontLeft && backRightTarget==backRight && backLeftTarget==backLeft){
+
+            //sleep for whatever number of milliseconds are inputted into the method
+            sleep(ms);
+        } **/
     }
 }
