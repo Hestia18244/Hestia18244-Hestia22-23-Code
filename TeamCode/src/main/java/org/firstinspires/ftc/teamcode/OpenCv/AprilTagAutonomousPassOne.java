@@ -64,8 +64,8 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
-        clawPartOne= hardwareMap.servo.get("clawPartOne");
+        //viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
+        //clawPartOne= hardwareMap.servo.get("clawPartOne");
         camera.setPipeline(aprilTagDetectionPipeline);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
@@ -172,7 +172,7 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
             //sets the four motors to move to position 1000 on the encoder ticks and sets the power of the motors to .5
             //sleeps the motors for one second once the method is finished running
             //this should move left
-            runToLocation(50, 50, 50 , 50, .2, 1000);
+            runToLocation(500, 500, 500 , 500, 0.2, 1000);
         } else if (tagOfInterest.id == locationTwo){
             //location two code
         } else if (tagOfInterest.id == locationThree){
@@ -194,37 +194,51 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
     //runToLocation method is called in the if statements to move the robot to whatever location
-    void runToLocation(int frontRight, int frontLeft, int backRight, int backLeft, double power, int ms){
+    public void runToLocation(int frontRight, int frontLeft, int backRight, int backLeft, double power, int ms){
         //resets the encoder value to zero for all motors
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        /*frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);*/
         //sets the motors to run to whatever position inputted into the method
         frontRightMotor.setTargetPosition(frontRight);
-        frontLeftMotor.setTargetPosition(frontLeft);
+        /*frontLeftMotor.setTargetPosition(frontLeft);
         backRightMotor.setTargetPosition(backRight);
-        backLeftMotor.setTargetPosition(backLeft);
+        backLeftMotor.setTargetPosition(backLeft);*/
+        int frontRightTarget= frontRightMotor.getCurrentPosition();
+        int frontLeftTarget = frontLeftMotor.getCurrentPosition();
+        int backRightTarget = backRightMotor.getCurrentPosition();
+        int backLeftTarget = backLeftMotor.getCurrentPosition();
+        frontRightMotor.setPower(power);
+        /*frontLeftMotor.setPower(power);
+        backRightMotor.setPower(power);
+        backLeftMotor.setPower(power);*/
         //sets the motors to run to the position it is told to
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        /*frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);*/
         //sets the power of the motors for when it moves to the encoder position
-        frontRightMotor.setPower(power);
-        frontLeftMotor.setPower(power);
-        backRightMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        while (frontRightMotor.isBusy() && frontLeftMotor.isBusy() && backRightMotor.isBusy() && backLeftMotor.isBusy()){
+        while (frontRightMotor.isBusy() || frontLeftMotor.isBusy() || backRightMotor.isBusy() || backLeftMotor.isBusy()) {
             //while the motors are busy, do nothing
-            idle();
         }
-        //once the motors are finished,set the power to zero
+        // moved setPower above runtoposition
+        // commented out the if
+        // changed the while loop to OR instead of AND
+        // moved setpower 0 outside of the if statement
+
         frontRightMotor.setPower(0);
         frontLeftMotor.setPower(0);
         backRightMotor.setPower(0);
         backLeftMotor.setPower(0);
-        //sleep for whatever number of milliseconds are inputted into the method
-        sleep(ms);
+
+
+        /**
+        //once the motors are finished,set the power to zero
+        if (frontRightTarget==frontRight && frontLeftTarget==frontLeft && backRightTarget==backRight && backLeftTarget==backLeft){
+
+            //sleep for whatever number of milliseconds are inputted into the method
+            sleep(ms);
+        } **/
     }
 }

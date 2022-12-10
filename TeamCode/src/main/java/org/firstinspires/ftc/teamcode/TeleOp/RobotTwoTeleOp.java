@@ -64,8 +64,8 @@ public class RobotTwoTeleOp extends OpMode {
         //if gamepad2 left bumper is pressed
         if (gamepad2.left_bumper) {
             //set the claw servos' position to be closed
-            clawPartOne.setPosition(.85);
-            clawPartZero.setPosition(.15);
+            clawPartOne.setPosition(.80);
+            clawPartZero.setPosition(.20);
         }
         //if gamepad2 right bumper is pressed
         if (gamepad2.right_bumper) {
