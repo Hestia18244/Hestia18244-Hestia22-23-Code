@@ -64,7 +64,7 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        //viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
+        viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
         //clawPartOne= hardwareMap.servo.get("clawPartOne");
         camera.setPipeline(aprilTagDetectionPipeline);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
@@ -197,27 +197,27 @@ public class AprilTagAutonomousPassOne extends LinearOpMode
     public void runToLocation(int frontRight, int frontLeft, int backRight, int backLeft, double power, int ms){
         //resets the encoder value to zero for all motors
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        /*frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);*/
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //sets the motors to run to whatever position inputted into the method
         frontRightMotor.setTargetPosition(frontRight);
-        /*frontLeftMotor.setTargetPosition(frontLeft);
+        frontLeftMotor.setTargetPosition(frontLeft);
         backRightMotor.setTargetPosition(backRight);
-        backLeftMotor.setTargetPosition(backLeft);*/
+        backLeftMotor.setTargetPosition(backLeft);
         int frontRightTarget= frontRightMotor.getCurrentPosition();
         int frontLeftTarget = frontLeftMotor.getCurrentPosition();
         int backRightTarget = backRightMotor.getCurrentPosition();
         int backLeftTarget = backLeftMotor.getCurrentPosition();
         frontRightMotor.setPower(power);
-        /*frontLeftMotor.setPower(power);
+        frontLeftMotor.setPower(power);
         backRightMotor.setPower(power);
-        backLeftMotor.setPower(power);*/
+        backLeftMotor.setPower(power);
         //sets the motors to run to the position it is told to
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        /*frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);*/
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         //sets the power of the motors for when it moves to the encoder position
         while (frontRightMotor.isBusy() || frontLeftMotor.isBusy() || backRightMotor.isBusy() || backLeftMotor.isBusy()) {
             //while the motors are busy, do nothing
