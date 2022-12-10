@@ -28,7 +28,13 @@ backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
     backRightMotor.setPower(-.5);
     backLeftMotor.setPower(-.5);
     //sleep causes this for 1 second (1000 milliseconds)
-    sleep(1000);
+    sleep(1100);
+      //sets power to all the motors to move backwards a small amount
+      frontRightMotor.setPower(.4);
+      frontLeftMotor.setPower(-.4);
+      backRightMotor.setPower(.4);
+      backLeftMotor.setPower(-.4);
+      sleep(200);
     //sets the power of the motors to zero
     frontRightMotor.setPower(0);
     frontLeftMotor.setPower(0);
