@@ -259,4 +259,20 @@ public class AprilTagAutonomousRight extends LinearOpMode
         //sets the duration of said power
         sleep(ms);
     }
+    //function that moves the robot right using runToLocation function
+    public void moveRight(int position1, int time1){
+        runToLocation(-1*position1, -1*position1, 1*position1, 1*position1, .5, time1*1);
+    }
+    //function that moves the robot left using runToLocation function
+    public void moveLeft(int position2, int time2){
+        runToLocation(1*position2, 1*position2, -1*position2, -1*position2,.5, time2*1);
+    }
+    //function that moves the robot forward using runToLocation function
+    public void moveForward(int position3, int time3){
+        runToLocation(1*position3, -1*position3, 1*position3, -1*position3, .5, time3*1);
+    }
+    //function that moves the robot backwards using runToLocation function
+    public void moveBackwards(int position4, int time4){
+        runToLocation(-1*position4, 1*position4, -1*position4, 1*position4, .5, time4*1);
+    }
 }
