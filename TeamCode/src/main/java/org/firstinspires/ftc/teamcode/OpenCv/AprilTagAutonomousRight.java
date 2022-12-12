@@ -165,78 +165,42 @@ public class AprilTagAutonomousRight extends LinearOpMode
         /* Actually do something useful */
         if (tagOfInterest == null || tagOfInterest.id == locationOne) {
             //location one code
-            //move backward
-            frontRightMotor.setPower(.5);
-            frontLeftMotor.setPower(-.5);
-            backRightMotor.setPower(.5);
-            backLeftMotor.setPower(-.5);
-            //sleep causes this to happen for 1 seconds (1000 milliseconds)
-            sleep(900);
-            //set power to move left
-            frontRightMotor.setPower(-.5);
-            frontLeftMotor.setPower(-.5);
-            backRightMotor.setPower(.5);
-            backLeftMotor.setPower(.5);
-            //sleep causes this to happen for 1 seconds (1000 milliseconds)
-            sleep(1800);
-            frontRightMotor.setPower(0);
-            frontLeftMotor.setPower(0);
-            backRightMotor.setPower(0);
-            backLeftMotor.setPower(0);
-            //sleep causes this to happen for 1 seconds (1000 milliseconds)
-            sleep(30000);
+
+            //move backward at .5 power for 900 milliseconds
+            notEncoders(.5, -.5,.5, -.5, 900);
+
+            //set power to move left at .5 power for 1800 milliseconds
+            notEncoders(-.5, -.5, .5, .5, 1800);
+
+            //stops the robot for the rest of autonomous
+            notEncoders(0,0,0,0,30000);
+
         } else if (tagOfInterest.id == locationTwo){
             //location two code
             //pass through location one
-            //move forward
-            frontRightMotor.setPower(.5);
-            frontLeftMotor.setPower(-.5);
-            backRightMotor.setPower(.5);
-            backLeftMotor.setPower(-.5);
-            //sleep causes this to happen for 1 seconds (1000 milliseconds)
-            sleep(900);
-            //set power to move left
-            frontRightMotor.setPower(-.5);
-            frontLeftMotor.setPower(-.5);
-            backRightMotor.setPower(.5);
-            backLeftMotor.setPower(.5);
-            //sleep causes this to happen for 1 seconds (1000 milliseconds)
-            sleep(2525);
-            //move forward into location two
-            frontRightMotor.setPower(-.5);
-            frontLeftMotor.setPower(.5);
-            backRightMotor.setPower(-.5);
-            backLeftMotor.setPower(.5);
-            sleep(900);
-            frontRightMotor.setPower(0);
-            frontLeftMotor.setPower(0);
-            backRightMotor.setPower(0);
-            backLeftMotor.setPower(0);
-            //sleep causes this to happen for 1 seconds (1000 milliseconds)
-            sleep(30000);
 
+            //move forward at .5 power for 900 milliseconds
+            notEncoders(.5, -.5, .5, -.5, 900);
+
+            //set power to move left at .5 power for 2525 milliseconds
+            notEncoders(-.5, -.5, .5, .5, 2525);
+
+            //move forward into location two at .5 power for 900 milliseconds
+            notEncoders(-.5, .5, -.5, .5, 900);
+
+            //stops the robot for the rest of autonomous
+            notEncoders(0,0,0,0,30000);
         } else if (tagOfInterest.id == locationThree){
             //location three code
-            //move forward
-            frontRightMotor.setPower(-.5);
-            frontLeftMotor.setPower(.5);
-            backRightMotor.setPower(-.5);
-            backLeftMotor.setPower(.5);
-            //sleep causes this to happen for 1 seconds (1000 milliseconds)
-            sleep(900);
-            //set power to move right
-            frontRightMotor.setPower(-.5);
-            frontLeftMotor.setPower(-.5);
-            backRightMotor.setPower(.5);
-            backLeftMotor.setPower(.5);
-            //sleep causes this to happen for 1 seconds (1000 milliseconds)
-            sleep(1800);
-            frontRightMotor.setPower(0);
-            frontLeftMotor.setPower(0);
-            backRightMotor.setPower(0);
-            backLeftMotor.setPower(0);
-            //sleep causes this to happen for 1 seconds (1000 milliseconds)
-            sleep(30000);
+
+            //move forward at .5 power for 900 milliseconds
+            notEncoders(-.5, .5, -.5, .5, 900);
+
+            //set power to move right at .5 power for 1800 seconds
+            notEncoders(-.5, -.5, .5, .5, 1800);
+
+            //stops the robot for the rest of autonomous
+            notEncoders(0,0,0,0,30000);
         }
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
@@ -265,10 +229,7 @@ public class AprilTagAutonomousRight extends LinearOpMode
         frontLeftMotor.setTargetPosition(frontLeft);
         backRightMotor.setTargetPosition(backRight);
         backLeftMotor.setTargetPosition(backLeft);
-        int frontRightTarget= frontRightMotor.getCurrentPosition();
-        int frontLeftTarget = frontLeftMotor.getCurrentPosition();
-        int backRightTarget = backRightMotor.getCurrentPosition();
-        int backLeftTarget = backLeftMotor.getCurrentPosition();
+        //sets the motors to whatever power is inputted into the method
         frontRightMotor.setPower(power);
         frontLeftMotor.setPower(power);
         backRightMotor.setPower(power);
@@ -278,27 +239,24 @@ public class AprilTagAutonomousRight extends LinearOpMode
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //sets the power of the motors for when it moves to the encoder position
         while (frontRightMotor.isBusy() || frontLeftMotor.isBusy() || backRightMotor.isBusy() || backLeftMotor.isBusy()) {
             //while the motors are busy, do nothing
         }
-        // moved setPower above runtoposition
-        // commented out the if
-        // changed the while loop to OR instead of AND
-        // moved setpower 0 outside of the if statement
-
+        //sets the power of the motors to zero once everything is finished moving
         frontRightMotor.setPower(0);
         frontLeftMotor.setPower(0);
         backRightMotor.setPower(0);
         backLeftMotor.setPower(0);
-
-
-        /**
-        //once the motors are finished,set the power to zero
-        if (frontRightTarget==frontRight && frontLeftTarget==frontLeft && backRightTarget==backRight && backLeftTarget==backLeft){
-
-            //sleep for whatever number of milliseconds are inputted into the method
-            sleep(ms);
-        } **/
+        //add a delay before whatever movement is next
+        sleep(ms);
+    }
+    public void notEncoders(double fRPower, double fLPower, double bRPower, double bLPower, int ms){
+        //sets the power of the motors to whatever is inputted into the method
+        frontRightMotor.setPower(fRPower);
+        frontLeftMotor.setPower(fLPower);
+        backRightMotor.setPower(bRPower);
+        backLeftMotor.setPower(bLPower);
+        //sets the duration of said power
+        sleep(ms);
     }
 }
