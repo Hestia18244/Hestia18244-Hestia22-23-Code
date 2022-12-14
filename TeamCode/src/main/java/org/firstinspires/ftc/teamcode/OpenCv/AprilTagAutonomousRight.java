@@ -219,34 +219,41 @@ public class AprilTagAutonomousRight extends LinearOpMode
     }
     //runToLocation method is called in the if statements to move the robot to whatever location
     public void runToLocation(int frontRight, int frontLeft, int backRight, int backLeft, double power, int ms){
+
         //resets the encoder value to zero for all motors
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         //sets the motors to run to whatever position inputted into the method
         frontRightMotor.setTargetPosition(frontRight);
         frontLeftMotor.setTargetPosition(frontLeft);
         backRightMotor.setTargetPosition(backRight);
         backLeftMotor.setTargetPosition(backLeft);
+
         //sets the motors to whatever power is inputted into the method
         frontRightMotor.setPower(power);
         frontLeftMotor.setPower(power);
         backRightMotor.setPower(power);
         backLeftMotor.setPower(power);
+
         //sets the motors to run to the position it is told to
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         while (frontRightMotor.isBusy() || frontLeftMotor.isBusy() || backRightMotor.isBusy() || backLeftMotor.isBusy()) {
             //while the motors are busy, do nothing
         }
+
         //sets the power of the motors to zero once everything is finished moving
         frontRightMotor.setPower(0);
         frontLeftMotor.setPower(0);
         backRightMotor.setPower(0);
         backLeftMotor.setPower(0);
+
         //add a delay before whatever movement is next
         sleep(ms);
     }
