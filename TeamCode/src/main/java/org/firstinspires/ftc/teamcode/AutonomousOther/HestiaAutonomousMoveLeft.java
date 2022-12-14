@@ -15,18 +15,18 @@ public class HestiaAutonomousMoveLeft extends LinearOpMode {
         
         //all code listed after here happens when opmode is active.
   public void runOpMode(){
-    waitForStart();
-    //maps the motors to what they are named on the drivers hub
-frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
+        waitForStart();
+        //maps the motors to what they are named on the drivers hub
+        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
+        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
+        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
+        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
   
-  //sets power to all the motors so that it moves left
-    frontRightMotor.setPower(-.5);
-    frontLeftMotor.setPower(-.5);
-    backRightMotor.setPower(.5);
-    backLeftMotor.setPower(.5);
+        //sets power to all the motors so that it moves left
+        frontRightMotor.setPower(-.5);
+        frontLeftMotor.setPower(-.5);
+        backRightMotor.setPower(.5);
+        backLeftMotor.setPower(.5);
     //sleep causes this to happen for 1 seconds (1000 milliseconds)
     sleep(1100);
     //sets power to all the motors to move backwards a small amount
