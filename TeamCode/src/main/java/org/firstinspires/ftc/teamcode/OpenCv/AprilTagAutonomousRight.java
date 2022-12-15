@@ -282,4 +282,28 @@ public class AprilTagAutonomousRight extends LinearOpMode
     public void moveBackwards(int position4, int time4){
         runToLocation(-1*position4, 1*position4, -1*position4, 1*position4, .5, time4*1);
     }
+    public void viperSlide (int slidePosition, double slidePower, int slideTime){
+
+        //stops and resets the encoder to zero
+        viperSlideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //sets the target position to whatever is inputted into the function
+        viperSlideMotor.setTargetPosition(slidePosition);
+
+        //sets the power to whatever is inputted into the function
+        viperSlideMotor.setPower(slidePower);
+
+        //sets the motor to run to position
+        viperSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while (viperSlideMotor.isBusy()){
+            //while the motor is busy, do nothing
+        }
+
+        //set the power of the motor to zero after it is finished
+        viperSlideMotor.setPower(0);
+
+        //add a delay after if needed
+        sleep(slideTime);
+    }
 }
