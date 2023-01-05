@@ -27,6 +27,7 @@ public class AprilTagAutonomousLeft extends LinearOpMode
     DcMotor backLeftMotor;
     DcMotor viperSlideMotor;
     Servo clawPartOne;
+    Servo clawPartZero;
     //declares that the pipeline is being used for this
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -61,7 +62,8 @@ public class AprilTagAutonomousLeft extends LinearOpMode
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
         viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
-        //clawPartOne = hardwareMap.servo.get("clawPartOne");
+        clawPartOne = hardwareMap.servo.get("clawPartOne");
+        clawPartZero = hardwareMap.servo.get("clawPartZero");
         camera.setPipeline(aprilTagDetectionPipeline);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
@@ -270,21 +272,21 @@ public class AprilTagAutonomousLeft extends LinearOpMode
     }
     //function that moves the robot right using runToLocation function
     public void moveRight(int position1, int time1){
-        runToLocation(-1*position1, -1*position1, 1*position1, 1*position1, .5, time1*1);
+        runToLocation(-position1, -position1, position1, position1, .5, time1);
     }
     //function that moves the robot left using runToLocation function
     public void moveLeft(int position2, int time2){
-        runToLocation(1*position2, 1*position2, -1*position2, -1*position2,.5, time2*1);
+        runToLocation(position2, position2, -position2, -position2,.5, time2);
     }
     //function that moves the robot forward using runToLocation function
     public void moveForward(int position3, int time3){
-        runToLocation(1*position3, -1*position3, 1*position3, -1*position3, .5, time3*1);
+        runToLocation(position3, -position3, position3, -position3, .5, time3);
     }
     //function that moves the robot backwards using runToLocation function
     public void moveBackwards(int position4, int time4){
-        runToLocation(-1*position4, 1*position4, -1*position4, 1*position4, .5, time4*1);
+        runToLocation(-position4, position4, -position4, position4, .5, time4);
     }
-    //function to move the viper slide motor
+    // This function moves the viperSlide motor based on whatever is inputted into the method
     public void viperSlide (int slidePosition, double slidePower, int slideTime){
 
         //stops and resets the encoder to zero
@@ -308,5 +310,15 @@ public class AprilTagAutonomousLeft extends LinearOpMode
 
         //add a delay after if needed
         sleep(slideTime);
+    }
+    // This function moves the two servos to a certain position based on whatever is inputted into the function
+    public void servoMove(int clawPartOnePos, int clawPartZeroPos, int delay){
+
+        // Moves the two servos to whatever is input into the function
+        clawPartOne.setPosition(clawPartOnePos);
+        clawPartZero.setPosition(clawPartZeroPos);
+
+        // Adds a delay after the servos move
+        sleep(delay);
     }
 }

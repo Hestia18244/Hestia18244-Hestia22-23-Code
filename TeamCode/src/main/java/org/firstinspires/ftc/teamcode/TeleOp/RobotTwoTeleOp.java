@@ -14,7 +14,6 @@ public class RobotTwoTeleOp extends OpMode {
     DcMotor viperSlideMotor;
     private Servo clawPartOne;
     private Servo clawPartZero;
-    private Servo slideServo;
 
     public void init(){
         //On startup, this code maps the motors and servos to their designations on the drivers hub
@@ -25,7 +24,6 @@ public class RobotTwoTeleOp extends OpMode {
         viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
         clawPartOne = hardwareMap.servo.get("clawPartOne");
         clawPartZero = hardwareMap.servo.get("clawPartZero");
-        //slideServo = hardwareMap.servo.get("slideServo");
         //whenever the cascading slide motor is set to zero power, the motors tries to brake
         viperSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
