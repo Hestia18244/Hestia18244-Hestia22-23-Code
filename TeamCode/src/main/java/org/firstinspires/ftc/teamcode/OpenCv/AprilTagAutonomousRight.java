@@ -1,6 +1,5 @@
 //this code should work for all three locations.
-//"PassOne" means that it passes through location one to get to location two
-//use this when location three is the one that contains the cones in it
+// This should be used when on the right side of the field (regardless of color)
 package org.firstinspires.ftc.teamcode.OpenCv;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
