@@ -1,5 +1,5 @@
 //This code will make the robot park and nothing else
-package org.firstinspires.ftc.teamcode.AutonomousOther;
+package org.firstinspires.ftc.teamcode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;

@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.OpenCv;
+package org.firstinspires.ftc.teamcode.OpenCvAutonomous;
 
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.CvType;

@@ -1,6 +1,6 @@
 //this code should work for all three locations.
 // This should be used when on the right side of the field (regardless of color)
-package org.firstinspires.ftc.teamcode.OpenCv;
+package org.firstinspires.ftc.teamcode.OpenCvAutonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;

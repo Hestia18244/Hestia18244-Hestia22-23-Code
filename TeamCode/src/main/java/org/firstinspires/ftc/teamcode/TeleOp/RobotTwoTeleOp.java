@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 @TeleOp (name = "RobotTwoTeleOp")
 
 public class RobotTwoTeleOp extends OpMode {
+
     //names the motors and servos
     DcMotor frontLeftMotor;
     DcMotor frontRightMotor;
@@ -16,6 +17,7 @@ public class RobotTwoTeleOp extends OpMode {
     private Servo clawPartZero;
 
     public void init(){
+
         //On startup, this code maps the motors and servos to their designations on the drivers hub
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
@@ -24,6 +26,7 @@ public class RobotTwoTeleOp extends OpMode {
         viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
         clawPartOne = hardwareMap.servo.get("clawPartOne");
         clawPartZero = hardwareMap.servo.get("clawPartZero");
+
         //whenever the cascading slide motor is set to zero power, the motors tries to brake
         viperSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -35,6 +38,7 @@ public class RobotTwoTeleOp extends OpMode {
 
     //Everything under loop happens during the whole period that the opMode is active
     public void loop() {
+
         //Different movements on the joysticks are configured to different variables
         //decimals are used to reduce power
         double forward = .4 * (gamepad1.left_stick_y);
@@ -42,13 +46,11 @@ public class RobotTwoTeleOp extends OpMode {
         double strafe = .55 * (-gamepad1.left_stick_x);
         double viperSlide = .35*(gamepad2.right_stick_y);
 
-
         //tells the motors that drive the robot which way to go for forward and back, strafing, and turning
         double leftfront = (-forward - turn - strafe);
         double rightfront = (forward - turn - strafe);
         double leftrear = (-forward - turn + strafe);
         double rightrear = (forward - turn + strafe);
-
 
         //sets the power of the motors to the previous variables
         frontLeftMotor.setPower(leftfront);
@@ -58,7 +60,7 @@ public class RobotTwoTeleOp extends OpMode {
         viperSlideMotor.setPower(viperSlide);
 
 
-//the following code sets the positions of the servos
+        //the following code sets the positions of the servos
         //if gamepad2 left bumper is pressed
         if (gamepad2.left_bumper) {
             //set the claw servos' position to be closed
