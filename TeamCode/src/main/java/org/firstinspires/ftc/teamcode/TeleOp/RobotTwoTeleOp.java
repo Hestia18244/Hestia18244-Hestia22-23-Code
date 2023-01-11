@@ -23,12 +23,12 @@ public class RobotTwoTeleOp extends OpMode {
         frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
-        viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
-        clawPartOne = hardwareMap.servo.get("clawPartOne");
-        clawPartZero = hardwareMap.servo.get("clawPartZero");
+        //viperSlideMotor = hardwareMap.dcMotor.get("viperSlideMotor");
+        //clawPartOne = hardwareMap.servo.get("clawPartOne");
+        //clawPartZero = hardwareMap.servo.get("clawPartZero");
 
         //whenever the cascading slide motor is set to zero power, the motors tries to brake
-        viperSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //viperSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
 
@@ -41,9 +41,9 @@ public class RobotTwoTeleOp extends OpMode {
 
         //Different movements on the joysticks are configured to different variables
         //decimals are used to reduce power
-        double forward = .4 * (gamepad1.left_stick_y);
-        double turn = .55 * (-gamepad1.right_stick_x);
-        double strafe = .55 * (-gamepad1.left_stick_x);
+        double forward = -.4 * (gamepad1.left_stick_y);
+        double turn = -.55 * (-gamepad1.right_stick_x);
+        double strafe = -.55 * (-gamepad1.left_stick_x);
         double viperSlide = .35*(gamepad2.right_stick_y);
 
         //tells the motors that drive the robot which way to go for forward and back, strafing, and turning
@@ -57,7 +57,7 @@ public class RobotTwoTeleOp extends OpMode {
         frontRightMotor.setPower(rightfront);
         backLeftMotor.setPower(leftrear);
         backRightMotor.setPower(rightrear);
-        viperSlideMotor.setPower(viperSlide);
+        //viperSlideMotor.setPower(viperSlide);
 
 
         //the following code sets the positions of the servos
