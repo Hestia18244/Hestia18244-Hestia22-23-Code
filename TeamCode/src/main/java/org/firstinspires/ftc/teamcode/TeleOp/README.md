@@ -104,7 +104,7 @@ We use the buttons to activate servos because of the button's boolean data type.
         //set the claw servos' position to be open
         clawPartOne.setPosition(1);
         clawPartZero.setPosition(0);
-    }
+    } 
 
 For our robot, we used two simple if statements that happen if the specified button is pressed.
 The buttons also work with other types of conditional statements,
