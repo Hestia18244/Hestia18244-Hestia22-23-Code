@@ -168,10 +168,10 @@ public class AprilTagAutonomousRight extends LinearOpMode
             //location one code
 
             //move backward at .5 power for 900 milliseconds
-            notEncoders(.5, -.5,.5, -.5, 900);
+            notEncoders(-.5, .5,-.5, .5, 900);
 
             //set power to move left at .5 power for 1800 milliseconds
-            notEncoders(-.5, -.5, .5, .5, 1800);
+            notEncoders(.5, .5, -.5, -.5, 1800);
 
             //stops the robot for the rest of autonomous
             notEncoders(0,0,0,0,30000);
@@ -181,13 +181,13 @@ public class AprilTagAutonomousRight extends LinearOpMode
             //pass through location one
 
             //move forward at .5 power for 900 milliseconds
-            notEncoders(.5, -.5, .5, -.5, 900);
+            notEncoders(-.5, .5, -.5, .5, 900);
 
             //set power to move left at .5 power for 2525 milliseconds
-            notEncoders(-.5, -.5, .5, .5, 2525);
+            notEncoders(.5, .5, -.5, -.5, 2525);
 
             //move forward into location two at .5 power for 900 milliseconds
-            notEncoders(-.5, .5, -.5, .5, 900);
+            notEncoders(.5, -.5, .5, -.5, 900);
 
             //stops the robot for the rest of autonomous
             notEncoders(0,0,0,0,30000);
@@ -195,10 +195,10 @@ public class AprilTagAutonomousRight extends LinearOpMode
             //location three code
 
             //move forward at .5 power for 900 milliseconds
-            notEncoders(-.5, .5, -.5, .5, 900);
+            notEncoders(.5, -.5, .5, -.5, 900);
 
             //set power to move right at .5 power for 1800 seconds
-            notEncoders(-.5, -.5, .5, .5, 1800);
+            notEncoders(.5, .5, -.5, -.5, 1800);
 
             //stops the robot for the rest of autonomous
             notEncoders(0,0,0,0,30000);
