@@ -41,9 +41,9 @@ public class RobotTwoTeleOp extends OpMode {
 
         //Different movements on the joysticks are configured to different variables
         //decimals are used to reduce power
-        double forward = -.4 * (gamepad1.left_stick_y);
-        double turn = -.55 * (-gamepad1.right_stick_x);
-        double strafe = -.55 * (-gamepad1.left_stick_x);
+        double forward = -.5 * (gamepad1.left_stick_y);
+        double turn = -.65 * (-gamepad1.right_stick_x);
+        double strafe = -.65 * (-gamepad1.left_stick_x);
         double viperSlide = -.75*(gamepad2.right_stick_y);
 
         //tells the motors that drive the robot which way to go for forward and back, strafing, and turning
