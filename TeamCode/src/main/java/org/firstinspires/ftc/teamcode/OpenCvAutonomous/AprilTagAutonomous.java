@@ -1,5 +1,5 @@
 //this code should work for all three locations.
-// This should be used when on the left side of the field (regardless of color)
+// This should be used when on the right side of the field (regardless of color)
 package org.firstinspires.ftc.teamcode.OpenCvAutonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -17,7 +17,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Autonomous
-public class AprilTagAutonomousLeft extends LinearOpMode
+public class AprilTagAutonomous extends LinearOpMode
 {
     OpenCvCamera camera;
     DcMotor frontRightMotor;
@@ -53,6 +53,7 @@ public class AprilTagAutonomousLeft extends LinearOpMode
     @Override
     public void runOpMode()
     {
+        //hardware maps the motors to what they are named in the drivers hub
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
@@ -163,53 +164,32 @@ public class AprilTagAutonomousLeft extends LinearOpMode
         }
 
         /* Actually do something useful */
-       if (tagOfInterest == null || tagOfInterest.id == locationOne) {
-           //location one code
+        if (tagOfInterest == null || tagOfInterest.id == locationOne) {
+            //location one code
 
-           //move backward at .5 power for 900 milliseconds
-           notEncoders(-.5, .5,-.5, .5, 1000);
+            //Move backwards for 990 ticks with a delay of 0 seconds
+            moveBackwards(990, 0);
 
-           //set power to move left at .5 power for 1800 milliseconds
-           notEncoders(.5, .5, -.5, -.5, 1670);
+            //move Left into location one for 1900 ticks and stop for the remainder of autonomous
+            moveLeft(1900, 30000);
 
-           //set power to move backwards for a slight amount of time
-           notEncoders(-.5, .5, -.5, .5, 100);
 
-           //stops the robot for the rest of autonomous
-           notEncoders(0,0,0,0,30000);
+        } else if (tagOfInterest.id == locationTwo){
+            //location two code
+            //pass through location one
+            //moves left fpr 2400 ticks into location 2
+            moveLeft(2400, 30000);
 
-       } else if (tagOfInterest.id == locationTwo){
-           //location two code
-           //passes through three
+        } else if (tagOfInterest.id == locationThree){
+            //location three code
 
-           //move forward at .5 power for 900 milliseconds
-           notEncoders(.5, -.5, .5, -.5, 800);
+            // move forward for 985 ticks with a delay of 0 seconds
+            moveForward(985, 0);
 
-           //set power to move left at .5 power for 2525 milliseconds
-           notEncoders(.5, .5, -.5, -.5, 2525);
+            // move left for 1900 ticks into location three and stop for the remainder of autonomous
+            moveLeft(1900,30000);
 
-           //move backward into location two at .5 power for 900 milliseconds
-           notEncoders(-.5, .5, -.5, .5, 700);
-
-           //stops the robot for the rest of autonomous
-           notEncoders(0,0,0,0,30000);
-
-       } else if (tagOfInterest.id == locationThree){
-           //location three code
-
-           //move forward at .5 power for 900 milliseconds
-           notEncoders(.5, -.5, .5, -.5, 1000);
-
-           //set power to move right at .5 power for 1800 seconds
-           notEncoders(.5, .5, -.5, -.5, 1670);
-
-           //sets power to move backward for a little bit of time
-           notEncoders(-.5, .5, -.5, .5, 100);
-
-           //stops the robot for the rest of autonomous
-           notEncoders(0,0,0,0,30000);
-
-       }
+        }
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
         //while (opModeIsActive()) {sleep(20);}
@@ -225,7 +205,6 @@ public class AprilTagAutonomousLeft extends LinearOpMode
         telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
-    //runToLocation method is called in the if statements to move the robot to whatever location
     //runToLocation method is called in the if statements to move the robot to whatever location
     public void runToLocation(int frontRight, int frontLeft, int backRight, int backLeft, double power, int ms){
 
@@ -257,6 +236,12 @@ public class AprilTagAutonomousLeft extends LinearOpMode
             //while the motors are busy, do nothing
         }
 
+        //sets the motors to run based on time
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         //sets the power of the motors to zero once everything is finished moving
         frontRightMotor.setPower(0);
         frontLeftMotor.setPower(0);
@@ -277,19 +262,19 @@ public class AprilTagAutonomousLeft extends LinearOpMode
     }
     //function that moves the robot right using runToLocation function
     public void moveRight(int position1, int time1){
-        runToLocation(-position1, -position1, position1, position1, .5, time1);
+        runToLocation(-position1, -position1, position1, position1, .6, time1);
     }
     //function that moves the robot left using runToLocation function
     public void moveLeft(int position2, int time2){
-        runToLocation(position2, position2, -position2, -position2,.5, time2);
+        runToLocation(position2, position2, -position2, -position2,.6, time2);
     }
     //function that moves the robot forward using runToLocation function
     public void moveForward(int position3, int time3){
-        runToLocation(position3, -position3, position3, -position3, .5, time3);
+        runToLocation(position3, -position3, position3, -position3, .6, time3);
     }
     //function that moves the robot backwards using runToLocation function
     public void moveBackwards(int position4, int time4){
-        runToLocation(-position4, position4, -position4, position4, .5, time4);
+        runToLocation(-position4, position4, -position4, position4, .6, time4);
     }
     // This function moves the viperSlide motor based on whatever is inputted into the method
     public void viperSlide (int slidePosition, double slidePower, int slideTime){
@@ -325,5 +310,27 @@ public class AprilTagAutonomousLeft extends LinearOpMode
 
         // Adds a delay after the servos move
         sleep(delay);
+    }
+    // This function allows me to move the viperSlide motor without setting the position to zero
+    public void viperSlideNoZero (int slidePosition, double slidePower, int ms){
+
+        //sets the target position to whatever is inputted into the function
+        viperSlideMotor.setTargetPosition(slidePosition);
+
+        //sets the power to whatever is inputted into the function
+        viperSlideMotor.setPower(slidePower);
+
+        //sets the motor to run to position
+        viperSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while (viperSlideMotor.isBusy()){
+            //while the motor is busy, do nothing
+        }
+
+        //set the power of the motor to zero after it is finished
+        viperSlideMotor.setPower(0);
+
+        //add a delay after if needed
+        sleep(ms);
     }
 }
