@@ -168,7 +168,7 @@ public class AprilTagAutonomous extends LinearOpMode
             //location one code
 
             //Move backwards for 990 ticks with a delay of 0 seconds
-            moveBackwards(990, 0);
+            moveBackwards(1000, 0);
 
             //move Left into location one for 1900 ticks and stop for the remainder of autonomous
             moveLeft(1900, 30000);
@@ -184,7 +184,7 @@ public class AprilTagAutonomous extends LinearOpMode
             //location three code
 
             // move forward for 985 ticks with a delay of 0 seconds
-            moveForward(985, 0);
+            moveForward(1000, 0);
 
             // move left for 1900 ticks into location three and stop for the remainder of autonomous
             moveLeft(1900,30000);
