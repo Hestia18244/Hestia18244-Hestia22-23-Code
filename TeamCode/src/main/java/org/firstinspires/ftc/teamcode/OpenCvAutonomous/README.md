@@ -27,7 +27,7 @@ for the three locations in three different `int` variables.
 On their own, they don't do anything, but these variables will make it
 easier to know which location a certain block of code is for.
 
-## Telemtry Data
+## Telemetry Data
 
 From about lines 88-150, the code there is mostly from the templates made by the people who made the plugin.
 It's mostly just code that displays things in the telemetry (driver's hub), and it makes sure that a tag is actually found.
