@@ -88,7 +88,7 @@ public class SampleMecanumDrive extends MecanumDrive {
         imu.initialize(parameters);
 
         leftFront = hardwareMap.get(DcMotorEx.class, "frontLeftMotor");
-        leftRear = hardwareMap.get(DcMotorEx.class, "backRightMotor");
+        leftRear = hardwareMap.get(DcMotorEx.class, "backLeftMotor");
         rightRear = hardwareMap.get(DcMotorEx.class, "backRightMotor");
         rightFront = hardwareMap.get(DcMotorEx.class, "frontRightMotor");
 
@@ -113,6 +113,7 @@ public class SampleMecanumDrive extends MecanumDrive {
         // TODO: reverse any motors using DcMotor.setDirection()
         leftFront.setDirection(DcMotor.Direction.REVERSE);
         leftRear.setDirection(DcMotor.Direction.REVERSE);
+        rightRear.setDirection(DcMotor.Direction.FORWARD);
 
         List<Integer> lastTrackingEncPositions = new ArrayList<>();
         List<Integer> lastTrackingEncVels = new ArrayList<>();
