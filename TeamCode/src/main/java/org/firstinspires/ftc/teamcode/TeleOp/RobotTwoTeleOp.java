@@ -44,11 +44,11 @@ public class RobotTwoTeleOp extends OpMode {
         double forward = -.5 * (gamepad1.left_stick_y);
         double turn = -.65 * (-gamepad1.right_stick_x);
         double strafe = -.65 * (-gamepad1.left_stick_x);
-        double viperSlide = -.75*(gamepad2.right_stick_y);
+        double viperSlide = .75*(gamepad2.right_stick_y);
 
         //tells the motors that drive the robot which way to go for forward and back, strafing, and turning
-        double leftfront = (-forward - turn - strafe);
-        double rightfront = (forward - turn - strafe);
+        double leftfront = (forward - turn - strafe);
+        double rightfront = (-forward - turn - strafe);
         double leftrear = (-forward - turn + strafe);
         double rightrear = (forward - turn + strafe);
 
@@ -64,14 +64,15 @@ public class RobotTwoTeleOp extends OpMode {
         //if gamepad2 left bumper is pressed
         if (gamepad2.left_bumper) {
             //set the claw servos' position to be open
-            clawPartOne.setPosition(1);
-            clawPartZero.setPosition(0);
+            clawPartOne.setPosition(0);
+            clawPartZero.setPosition(1);
         }
         //if gamepad2 right bumper is pressed
         if (gamepad2.right_bumper) {
             //set the claw servos' position to be closed
-            clawPartOne.setPosition(.75);
-            clawPartZero.setPosition(.25);
+            //CHANGE TO SMALLER NUMBERS
+            clawPartOne.setPosition(.25);
+            clawPartZero.setPosition(.75);
         }
     }
 }

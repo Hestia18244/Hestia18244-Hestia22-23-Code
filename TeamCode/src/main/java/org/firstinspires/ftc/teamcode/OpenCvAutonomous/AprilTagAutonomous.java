@@ -270,11 +270,11 @@ public class AprilTagAutonomous extends LinearOpMode
     }
     //function that moves the robot forward using runToLocation function
     public void moveForward(int position3, int time3){
-        runToLocation(position3, -position3, position3, -position3, .6, time3);
+        runToLocation(-position3, position3, position3, -position3, .6, time3);
     }
     //function that moves the robot backwards using runToLocation function
     public void moveBackwards(int position4, int time4){
-        runToLocation(-position4, position4, -position4, position4, .6, time4);
+        runToLocation(position4, -position4, -position4, position4, .6, time4);
     }
     // This function moves the viperSlide motor based on whatever is inputted into the method
     public void viperSlide (int slidePosition, double slidePower, int slideTime){
